@@ -7,13 +7,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 
 
+// this component is responsible for ==> 🟩 Displaying all action related to Pin Post
 // this component call from 🟨 ../component/MasonryLayout.js 🟨 <Component />
 const Pin = ({ pin }) => {
 
     const navigate = useNavigate();
-    const { postedBy, image, _id, destination } = pin;
-    const [savingPost, setSavingPost] = useState(false);
     const [postHovered, setPostHovered] = useState(false);
+    const { postedBy, image, _id, destination, save } = pin;
 
     const user = localStorage.getItem('user') !== 'undefined'
         ? JSON.parse(localStorage.getItem('user'))
@@ -29,13 +29,11 @@ const Pin = ({ pin }) => {
     };
 
 
-    let alreadySaved = pin?.save?.filter((item) => item?.postedBy?._id === user?.googleId);
-    alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
+    const alreadySaved = !!(save?.filter((item) => item?.postedBy?._id === user?.googleId))?.length;
 
 
     const savePin = (id) => {
-        if (alreadySaved?.length === 0) {
-            setSavingPost(true);
+        if (!alreadySaved) {
 
             sanityConnection
                 .patch(id)
@@ -51,7 +49,6 @@ const Pin = ({ pin }) => {
                 .commit()
                 .then(() => {
                     window.location.reload();
-                    setSavingPost(false);
                 });
         }
     };
@@ -75,10 +72,8 @@ const Pin = ({ pin }) => {
 
                 {
                     postHovered && (
-                        <div
-                            className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50"
-                            style={{ height: '100%' }}
-                        >
+                        <div className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50">
+
                             <div className="flex items-center justify-between">
 
                                 <div className="flex gap-2">
@@ -93,11 +88,12 @@ const Pin = ({ pin }) => {
                                 </div>
 
                                 {
-                                    alreadySaved?.length !== 0 ? (
+                                    // 🟨🟨🟨 UI for ==> Save Button
+                                    alreadySaved ? (
                                         <button
                                             type="button"
                                             className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none">
-                                            {pin?.save?.length}  Saved
+                                            {save?.length}  Saved
                                         </button>
                                     ) : (
                                         <button
@@ -108,7 +104,8 @@ const Pin = ({ pin }) => {
                                             type="button"
                                             className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
                                         >
-                                            {pin?.save?.length} {savingPost ? 'Saving' : 'Save'}
+                                            Save
+                                            {/* {save?.length} {savingPost ? 'Saving' : 'Save'} */}
                                         </button>
                                     )
                                 }
@@ -116,6 +113,7 @@ const Pin = ({ pin }) => {
 
                             <div className="flex justify-between items-center gap-2 w-full">
                                 {
+                                    // 🟨🟨🟨 UI for ==> Website link
                                     destination?.slice(8).length > 0
                                         ? (
                                             <a
@@ -126,12 +124,14 @@ const Pin = ({ pin }) => {
                                             >
                                                 {' '}
                                                 <BsFillArrowUpRightCircleFill />
-                                                {destination?.slice(8, 17)}...
+                                                {/* {destination?.slice(12, 25)}... */}
+                                                {destination?.split('.')[1]}...
                                             </a>
                                         ) : undefined
                                 }
 
                                 {
+                                    // 🟨🟨🟨 UI for ==> Deleting pin
                                     postedBy?._id === user?.googleId && (
                                         <button
                                             type="button"
@@ -151,6 +151,8 @@ const Pin = ({ pin }) => {
                 }
             </div>
 
+
+            {/* 🟨🟨🟨 link for profile --> who create this pin */}
             <Link
                 to={`/user-profile/${postedBy?._id}`}
                 className="flex gap-2 mt-2 items-center"

@@ -8,6 +8,7 @@ import MasonryLayout from './MasonryLayout';
 import Spinner from './Spinner';
 
 
+// this component is responsible for ==> 🟩 Display details info about Pin Post
 // this component call from 🟨 ../component/Pin.js 🟨 <Component />
 // by the help of React <Router>
 const PinDetail = ({ user }) => {
@@ -21,20 +22,23 @@ const PinDetail = ({ user }) => {
 
   const fetchPinDetails = () => {
 
+    // import sanity query function & use here...
     const query = pinDetailQuery(pinId);
 
     if (query) {
 
-      sanityConnection.fetch(`${query}`).then(data => {
+      // by sanity query, get data from sanity 
+      sanityConnection.fetch(`${query}`)
+        .then(data => {
 
-        setPinDetail(data[0]);
+          setPinDetail(data[0]);
 
-        if (data[0]) {
-          const query1 = pinDetailMorePinQuery(data[0]);
-          sanityConnection.fetch(query1)
-            .then(res => setPins(res));
-        }
-      });
+          if (data[0]) {
+            const query1 = pinDetailMorePinQuery(data[0]);
+            sanityConnection.fetch(query1)
+              .then(res => setPins(res));
+          }
+        });
     }
   };
 
@@ -93,17 +97,18 @@ const PinDetail = ({ user }) => {
                 <div className="flex gap-2 items-center">
                   <a
                     download
+                    title='Download Image'
                     href={`${pinDetail.image.asset.url}?dl=`}
-                    className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100"
+                    className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 "
                   >
                     <MdDownloadForOffline />
                   </a>
                 </div>
 
                 <a
-                  href={pinDetail.destination}
-                  target="_blank"
                   rel="noreferrer"
+                  target="_blank"
+                  href={pinDetail.destination}
                 >
                   {pinDetail.destination?.slice(8)}
                 </a>

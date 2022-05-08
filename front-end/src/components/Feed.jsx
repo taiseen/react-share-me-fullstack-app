@@ -13,7 +13,6 @@ const Feed = () => {
   const { categoryId } = useParams();
   const [pins, setPins] = useState();
   const [loading, setLoading] = useState(false);
-  console.log(pins);
 
 
   useEffect(() => {

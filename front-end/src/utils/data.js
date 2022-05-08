@@ -1,48 +1,51 @@
 export const categories = [
     {
         name: 'cars',
-        image: 'https://i.pinimg.com/750x/eb/47/44/eb4744eaa3b3ccd89749fa3470e2b0de.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/1149/PNG/512/1486504337-car-transportation-transport-travel-vehicle_81301.png',
     },
     {
         name: 'fitness',
-        image: 'https://i.pinimg.com/236x/25/14/29/251429345940a47490cc3d47dfe0a8eb.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/2979/PNG/512/dumbbells_gym_fitness_sport_icon_186978.png',
     },
     {
         name: 'wallpaper',
-        image: 'https://i.pinimg.com/236x/03/48/b6/0348b65919fcbe1e4f559dc4feb0ee13.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/1880/PNG/512/iconfinder-image-4341296_120549.png',
     },
     {
         name: 'websites',
-        image: 'https://i.pinimg.com/750x/66/b1/29/66b1296d36598122e6a4c5452b5a7149.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/1148/PNG/512/1486503764-browser-interface-ui-design-layout-website_81271.png',
     },
     {
         name: 'photo',
-        image: 'https://i.pinimg.com/236x/72/8c/b4/728cb43f48ca762a75da645c121e5c57.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/1149/PNG/512/1486504357-camera-digital-photograph-dslr-fullframe-photo_81309.png',
     },
     {
         name: 'food',
-        image: 'https://i.pinimg.com/236x/7d/ef/15/7def15ac734837346dac01fad598fc87.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/1151/PNG/512/1486505264-food-fork-kitchen-knife-meanns-restaurant_81404.png',
     },
     {
         name: 'nature',
-        image: 'https://i.pinimg.com/236x/b9/82/d4/b982d49a1edd984c4faef745fd1f8479.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/1147/PNG/512/1486486299-aroma-blossom-dsy-flower-flowers-nature_81223.png',
     },
     {
         name: 'art',
-        image: 'https://i.pinimg.com/736x/f4/e5/ba/f4e5ba22311039662dd253be33bf5f0e.jpg',
-    }, {
+        image: 'https://cdn.icon-icons.com/icons2/483/PNG/512/art-palette_47204.png',
+    }, 
+    {
         name: 'travel',
-        image: 'https://i.pinimg.com/236x/fa/95/98/fa95986f2c408098531ca7cc78aee3a4.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/2640/PNG/512/airplane_plane_travel_travels_icon_159298.png',
     },
     {
         name: 'quotes',
-        image: 'https://i.pinimg.com/236x/46/7c/17/467c17277badb00b638f8ec4da89a358.jpg',
-    }, {
+        image: 'https://cdn.icon-icons.com/icons2/643/PNG/512/q-letter-single-brand-social-media_icon-icons.com_59312.png',
+    }, 
+    {
         name: 'cats',
-        image: 'https://i.pinimg.com/236x/6c/3c/52/6c3c529e8dadc7cffc4fddedd4caabe1.jpg',
-    }, {
+        image: 'https://cdn.icon-icons.com/icons2/1698/PNG/256/60instagramhighlighticons63_112140.png',
+    }, 
+    {
         name: 'dogs',
-        image: 'https://i.pinimg.com/236x/1b/c8/30/1bc83077e363db1a394bf6a64b071e9f.jpg',
+        image: 'https://cdn.icon-icons.com/icons2/2063/PNG/512/pet_animal_badge_paw_pawprint_icon_124631.png',
     },
     {
         name: 'others',
