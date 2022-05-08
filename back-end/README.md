@@ -1,3 +1,6 @@
-# Sanity Clean Content Studio
+## Share Me 
 
-Congratulations, you have now installed the Sanity Content Studio, an open source real-time content editing environment connected to the Sanity backend.
+# Backend ==> Sanity
+
+* yarn add @sanity/cli
+* sanity init --project-plan boosted-free-2021-12-08

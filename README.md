@@ -26,4 +26,6 @@
 |11| yarn add `@sanity/image-url`    | Tools to generate image urls from Sanity content                     |
 
 
+* [Loader Spinner](https://mhnpd.github.io/react-loader-spinner)
+
 Learning by inspired from[.](https://youtu.be/1RHDhtbqo94)
