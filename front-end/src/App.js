@@ -8,7 +8,6 @@ const App = () => {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
     
     const User = localStorage.getItem('user') !== 'undefined'

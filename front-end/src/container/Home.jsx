@@ -1,5 +1,5 @@
+import { sanityConnection } from '../utils/sanityConnection';
 import { Link, Route, Routes } from 'react-router-dom';
-import { sanityConnection } from '../sanityConnection';
 import { useState, useRef, useEffect } from 'react';
 import { Sidebar, UserProfile } from '../components';
 import { AiFillCloseCircle } from 'react-icons/ai';

@@ -1,11 +1,13 @@
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/sanityQuery';
-import { sanityConnection, urlFor } from '../sanityConnection';
+import { sanityConnection, urlFor } from '../utils/sanityConnection';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import MasonryLayout from './MasonryLayout';
+import Tippy from '@tippyjs/react';
 import Spinner from './Spinner';
+import 'tippy.js/dist/tippy.css';
 
 
 // this component is responsible for ==> 🟩 Display details info about Pin Post
@@ -20,6 +22,7 @@ const PinDetail = ({ user }) => {
   const [addingComment, setAddingComment] = useState(false);
 
 
+  // fetch data from sanity about 1️⃣ specific post...
   const fetchPinDetails = () => {
 
     // import sanity query function & use here...
@@ -31,9 +34,12 @@ const PinDetail = ({ user }) => {
       sanityConnection.fetch(`${query}`)
         .then(data => {
 
+          // get 1️⃣ specific pin post 
           setPinDetail(data[0]);
 
           if (data[0]) {
+            // get all data about this 1️⃣ specific pin post 
+            // so run sanity query again...
             const query1 = pinDetailMorePinQuery(data[0]);
             sanityConnection.fetch(query1)
               .then(res => setPins(res));
@@ -43,17 +49,14 @@ const PinDetail = ({ user }) => {
   };
 
 
-  useEffect(() => {
-    fetchPinDetails();
-  }, [pinId]);
-
-
+  // add comment into sanity for related 1️⃣ specific post...
   const addComment = () => {
 
     if (comment) {
 
       setAddingComment(true);
 
+      // sanity data POST system...
       sanityConnection
         .patch(pinId)
         .setIfMissing({ comments: [] })
@@ -68,19 +71,18 @@ const PinDetail = ({ user }) => {
   };
 
 
-  if (!pinDetail) {
-    return (
-      <Spinner message="Showing pin" />
-    );
-  }
+  useEffect(() => {
+    fetchPinDetails();
+  }, [pinId]);
 
 
+  if (!pinDetail) <Spinner message="Showing pin" />
 
   return (
     <>
       {
         pinDetail && (
-          <div className="flex xl:flex-row flex-col m-auto bg-white"
+          <div className="flex flex-col xl:flex-row m-auto bg-white"
             style={{ maxWidth: '1500px', borderRadius: '32px' }}>
 
             <div className="flex justify-center items-center md:items-start flex-initial">
@@ -95,14 +97,15 @@ const PinDetail = ({ user }) => {
               <div className="flex items-center justify-between">
 
                 <div className="flex gap-2 items-center">
-                  <a
-                    download
-                    title='Download Image'
-                    href={`${pinDetail.image.asset.url}?dl=`}
-                    className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 "
-                  >
-                    <MdDownloadForOffline />
-                  </a>
+                  <Tippy content="Download Image">
+                    <a
+                      download
+                      href={`${pinDetail.image.asset.url}?dl=`}
+                      className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 "
+                    >
+                      <MdDownloadForOffline fontSize={28}/>
+                    </a>
+                  </Tippy>
                 </div>
 
                 <a
@@ -122,6 +125,7 @@ const PinDetail = ({ user }) => {
                 <p className="mt-3">{pinDetail.about}</p>
               </div>
 
+              {/* 🟨🟨🟨 for going to ==> User Profile <Component/> */}
               <Link
                 to={`/user-profile/${pinDetail?.postedBy._id}`}
                 className="flex gap-2 mt-5 items-center bg-white rounded-lg ">
@@ -132,10 +136,12 @@ const PinDetail = ({ user }) => {
                 <p className="font-bold">{pinDetail?.postedBy.userName}</p>
               </Link>
 
-              <h2 className="mt-5 text-2xl">Comments</h2>
 
+              {/* 🟨🟨🟨 UI for ==> Just Display User Comments... */}
+              <h2 className="mt-5 text-2xl">Comments</h2>
               <div className="max-h-370 overflow-y-auto">
                 {
+                  // 🟨🟨🟨 UI for ==> User Comment Display...
                   pinDetail?.comments?.map(item => (
                     <div
                       key={item.comment}
@@ -156,8 +162,10 @@ const PinDetail = ({ user }) => {
               </div>
 
 
+              {/* 🟨🟨🟨 UI for ==> User Comment Input... */}
               <div className="flex flex-wrap mt-6 gap-3">
 
+                {/* 🟨🟨🟨 for going to ==> User Profile <Component/> */}
                 <Link to={`/user-profile/${user._id}`}>
                   <img
                     src={user.image}
@@ -177,15 +185,17 @@ const PinDetail = ({ user }) => {
                 <button
                   type="button"
                   onClick={addComment}
-                  className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
+                  className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none hover:bg-red-700 duration-300 ease-linear"
                 >
-                  {addingComment ? 'Doing...' : 'Done'}
+                  {addingComment ? 'Posting the comment...' : 'Post'}
                 </button>
               </div>
+
             </div>
           </div>
         )
       }
+
 
       {
         pins?.length > 0 && (
@@ -194,6 +204,7 @@ const PinDetail = ({ user }) => {
           </h2>
         )
       }
+
 
       {
         pins ? (

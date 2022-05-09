@@ -1,10 +1,12 @@
 // GROQ ==> Graph Relational Object Queries
 
 // this query function call from 🟨 ../container/Home.js 🟨 <Component />
+// this query function call from 🟨 ../component/UserProfile.js 🟨 <Component />
 export const userQuery = (userId) => {
   const query = `*[_type == "user" && _id == '${userId}']`;
   return query;
 };
+
 
 // this query function call from 🟨 ../component/Feed.js 🟨 <Component />
 export const searchQuery = (searchTerm) => {
@@ -32,6 +34,7 @@ export const searchQuery = (searchTerm) => {
           }`;
   return query;
 };
+
 
 // this query function call from 🟨 ../component/Feed.js 🟨 <Component />
 export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
@@ -125,7 +128,7 @@ export const pinDetailMorePinQuery = (pin) => {
 };
 
 
-
+// this query function call from 🟨 ../component/UserProfile.js 🟨 <Component />
 export const userCreatedPinsQuery = (userId) => {
     const query = `*[ _type == 'pin' && userId == '${userId}'] | order(_createdAt desc){
       image{
@@ -152,6 +155,7 @@ export const userCreatedPinsQuery = (userId) => {
 };
 
 
+// this query function call from 🟨 ../component/UserProfile.js 🟨 <Component />
 export const userSavedPinsQuery = (userId) => {
     const query = `*[_type == 'pin' && '${userId}' in save[].userId ] | order(_createdAt desc) {
       image{

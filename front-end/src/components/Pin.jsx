@@ -1,10 +1,12 @@
-import { sanityConnection, urlFor } from '../sanityConnection';
+import { sanityConnection, urlFor } from '../utils/sanityConnection';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 
 // this component is responsible for ==> 🟩 Displaying all action related to Pin Post
@@ -77,14 +79,16 @@ const Pin = ({ pin }) => {
                             <div className="flex items-center justify-between">
 
                                 <div className="flex gap-2">
-                                    <a
-                                        download
-                                        href={`${image?.asset?.url}?dl=`}
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
-                                    >
-                                        <MdDownloadForOffline />
-                                    </a>
+                                    <Tippy content="Download this pin">
+                                        <a
+                                            download
+                                            href={`${image?.asset?.url}?dl=`}
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
+                                        >
+                                            <MdDownloadForOffline />
+                                        </a>
+                                    </Tippy>
                                 </div>
 
                                 {
@@ -131,18 +135,20 @@ const Pin = ({ pin }) => {
                                 }
 
                                 {
-                                    // 🟨🟨🟨 UI for ==> Deleting pin
+                                    // 🟨🟨🟨 UI for ==> 🟥 Deleting pin
                                     postedBy?._id === user?.googleId && (
-                                        <button
-                                            type="button"
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                deletePin(_id);
-                                            }}
-                                            className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
-                                        >
-                                            <AiTwotoneDelete />
-                                        </button>
+                                        <Tippy content="Delete this pin">
+                                            <button
+                                                type="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    deletePin(_id);
+                                                }}
+                                                className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
+                                            >
+                                                <AiTwotoneDelete />
+                                            </button>
+                                        </Tippy>
                                     )
                                 }
                             </div>

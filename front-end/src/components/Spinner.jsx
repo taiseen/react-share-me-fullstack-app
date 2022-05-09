@@ -3,6 +3,7 @@ import { Circles } from 'react-loader-spinner';
 
 // this component call from 🟨 ../component/Feed.js 🟨 <Component />
 // this component call from 🟨 ../component/PinDetail.js 🟨 <Component />
+// this component call from 🟨 ../component/CreatePin.js 🟨 <Component />
 function Spinner({ message }) {
 
     return (
@@ -10,7 +11,7 @@ function Spinner({ message }) {
             <Circles
                 width={70}
                 height={70}
-                color="tomato"
+                color="#00BFFF"
                 className="m-5"
             />
 

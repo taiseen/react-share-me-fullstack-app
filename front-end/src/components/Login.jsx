@@ -1,4 +1,4 @@
-import { sanityConnection } from '../sanityConnection';
+import { sanityConnection } from '../utils/sanityConnection';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import GoogleLogin from 'react-google-login';

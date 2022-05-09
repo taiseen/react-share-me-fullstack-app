@@ -3,6 +3,8 @@ import { NavLink, Link } from 'react-router-dom';
 import { RiHomeFill } from 'react-icons/ri';
 import { categories } from '../utils/data';
 import logo from '../assets/logo.png';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 
 const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize';
@@ -70,22 +72,25 @@ const Sidebar = ({ closeToggle, user }) => {
 
       {
         user && (
-          <Link
-            to={`user-profile/${user._id}`}
-            onClick={handleCloseSidebar}
-            className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3"
-          >
-            <img
-              alt="user-profile"
-              src={user.image} className="w-10 h-10 rounded-full"
-            />
-            <p>{user.userName}</p>
-            <IoIosArrowForward />
-          </Link>
+          // 🟨🟨🟨 for going to ==> User Profile <Component/> 
+          <Tippy content="User Profile" >
+            <Link
+              to={`user-profile/${user._id}`}
+              onClick={handleCloseSidebar}
+              className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3"
+            >
+              <img
+                alt="user-profile"
+                src={user.image} className="w-10 h-10 rounded-full"
+              />
+              <p>{user.userName}</p>
+              <IoIosArrowForward />
+            </Link>
+          </Tippy>
         )
       }
-      
-    </div>
+
+    </div >
   );
 };
 

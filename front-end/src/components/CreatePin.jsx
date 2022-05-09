@@ -1,4 +1,4 @@
-import { sanityConnection } from '../sanityConnection';
+import { sanityConnection } from '../utils/sanityConnection';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { categories } from '../utils/data';
@@ -36,29 +36,27 @@ const CreatePin = ({ user }) => {
       setWrongImageType(false);
       setLoading(true);
 
-      // 🟩🟩🟩 uploading image asset to sanity
+      // 🟩🟩🟩 uploading image asset to sanity... 
       sanityConnection.assets
         .upload('image', e.target.files[0], { contentType: type, filename: name })
-        .then((document) => {
+        .then(document => {
           setImageAsset(document);
           setLoading(false);
         })
-        .catch((error) => {
-          console.log('Upload failed:', error.message);
-        });
+        .catch(error => console.log('Upload failed:', error.message));
     } else {
-      setLoading(false);
       setWrongImageType(true);
+      setLoading(false);
     }
   };
 
 
-  // 🟩🟩🟩 this function is responsible for User Object save into Sanity
+  // 🟩🟩🟩 this function is responsible for User {Object} 💾 save into Sanity...
   const savePin = () => {
 
     if (title && about && destination && imageAsset?._id && category) {
 
-      // object creation for storing into sanity
+      // object creation for storing this {Object} into sanity...
       const doc = {
         _type: 'pin',
         title,
@@ -79,18 +77,12 @@ const CreatePin = ({ user }) => {
         category,
       };
 
-      // 🟩🟩🟩 save object into sanity
+      // 🟩🟩🟩 save object into sanity | after then ==> go to index page...
       sanityConnection.create(doc).then(() => navigate('/'));
 
     } else {
       setFields(true);
-
-      setTimeout(
-        () => {
-          setFields(false);
-        },
-        2000,
-      );
+      setTimeout(() => setFields(false), 2000);
     }
   };
 
@@ -107,7 +99,7 @@ const CreatePin = ({ user }) => {
         )
       }
 
-      <div className=" flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5  w-full">
+      <div className=" flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5 w-full">
 
         <div className="bg-secondaryColor p-3 flex flex-0.7 w-full">
 
@@ -125,7 +117,7 @@ const CreatePin = ({ user }) => {
                   <div className="flex flex-col items-center justify-center h-full cursor-pointer">
                     <div className="flex flex-col justify-center items-center">
                       <p className="font-bold text-2xl cursor-pointer">
-                        <AiOutlineCloudUpload />
+                        <AiOutlineCloudUpload fontSize={50}/>
                       </p>
                       <p className="text-lg cursor-pointer">Click to upload</p>
                     </div>
@@ -143,6 +135,7 @@ const CreatePin = ({ user }) => {
                   />
                 </label>
               ) : (
+                // 🟨🟨🟨 UI for ==> Image Displaying...
                 <div className="relative h-full">
                   <img
                     alt="uploaded-pic"
@@ -157,7 +150,8 @@ const CreatePin = ({ user }) => {
                     <MdDelete />
                   </button>
                 </div>
-              )}
+              )
+            }
           </div>
         </div>
 
@@ -215,6 +209,7 @@ const CreatePin = ({ user }) => {
                 { // loop over "[categories]" array... for print option
                   categories.map(item => (
                     <option
+                      key={item.name}
                       value={item.name}
                       className="text-base border-0 outline-none capitalize bg-white text-black"
                     >
@@ -230,7 +225,7 @@ const CreatePin = ({ user }) => {
               <button
                 type="button"
                 onClick={savePin}
-                className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none"
+                className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none hover:bg-red-700 duration-300 ease-linear"
               >
                 Save Pin
               </button>

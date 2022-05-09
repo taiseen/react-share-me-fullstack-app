@@ -1,5 +1,5 @@
 import { feedQuery, searchQuery } from '../utils/sanityQuery';
-import { sanityConnection } from '../sanityConnection';
+import { sanityConnection } from '../utils/sanityConnection';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import MasonryLayout from './MasonryLayout';

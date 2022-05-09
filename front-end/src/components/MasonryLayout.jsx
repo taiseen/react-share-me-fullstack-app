@@ -13,6 +13,7 @@ const breakpointColumnsObj = {
 
 
 // this component call from 🟨 ../component/Feed.js 🟨 <Component />
+// this component call from 🟨 ../component/PinDetail.js 🟨 <Component />
 const MasonryLayout = ({ pins }) => (
 
   <Masonry
