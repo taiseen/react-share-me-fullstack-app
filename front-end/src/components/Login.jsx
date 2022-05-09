@@ -12,12 +12,14 @@ const Login = () => {
 
   const responseGoogle = (response) => {
 
+    console.log("Login...")
+    
     // after user login, store 💾 user info at localStorage
     // for future usage of in this application
-    localStorage.setItem('user', JSON.stringify(response.profileObj));
+    localStorage.setItem('user', JSON.stringify(response?.profileObj));
 
     // get only needful data fields by Object Destructuring...
-    const { name, googleId, imageUrl } = response.profileObj;
+    const { name, googleId, imageUrl } = response?.profileObj;
 
     // Q: what we should do by these data fields ❓❔❓
     // A: creating a new sanity document for user & save into DB... ✅

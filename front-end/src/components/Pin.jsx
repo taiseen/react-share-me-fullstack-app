@@ -3,6 +3,7 @@ import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiTwotoneDelete } from 'react-icons/ai';
+import { fetchUser } from '../utils/fetchUser';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import Tippy from '@tippyjs/react';
@@ -17,10 +18,8 @@ const Pin = ({ pin }) => {
     const [postHovered, setPostHovered] = useState(false);
     const { postedBy, image, _id, destination, save } = pin;
 
-    const user = localStorage.getItem('user') !== 'undefined'
-        ? JSON.parse(localStorage.getItem('user'))
-        : localStorage.clear();
-
+    // get user from LocalStorage...
+    const user = fetchUser();
 
     const deletePin = (id) => {
         sanityConnection

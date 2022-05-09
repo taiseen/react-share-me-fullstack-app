@@ -1,4 +1,5 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { fetchUser } from './utils/fetchUser';
 import { Login } from './components';
 import { useEffect } from 'react';
 import Home from './container/Home';
@@ -9,10 +10,8 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
-    const User = localStorage.getItem('user') !== 'undefined'
-      ? JSON.parse(localStorage.getItem('user'))
-      : localStorage.clear();
+
+    const User = fetchUser();
 
     // if no user login, then always show this login <Components />
     if (!User) navigate('/login');

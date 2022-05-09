@@ -1,10 +1,9 @@
 06 - May - 2022
 
-## Share Me | [Live Link](www)
+## Share Me | [Live Link](https://share-me-img.netlify.app)
 
 # React + Sanity + Tailwind-CSS
-
-FullStack Social Media Application 
+* FullStack Social Media Application 
 
 ## Backend - Sanity
 * yarn add @sanity/cli

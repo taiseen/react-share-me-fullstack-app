@@ -3,6 +3,7 @@ import { sanityConnection } from '../utils/sanityConnection';
 import { useParams, useNavigate } from 'react-router-dom';
 import { GoogleLogout } from 'react-google-login';
 import { AiOutlineLogout } from 'react-icons/ai';
+import { fetchUser } from '../utils/fetchUser';
 import { useEffect, useState } from 'react';
 import MasonryLayout from './MasonryLayout';
 import Tippy from '@tippyjs/react';
@@ -31,9 +32,8 @@ const UserProfile = () => {
   const [activeBtn, setActiveBtn] = useState('created');
 
 
-  const User = localStorage.getItem('user') !== 'undefined'
-    ? JSON.parse(localStorage.getItem('user'))
-    : localStorage.clear();
+  // get user from LocalStorage...
+  const User = fetchUser();
 
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const UserProfile = () => {
   const logout = () => {
     localStorage.clear();
     navigate('/login');
-    console.log("user logout...");
+    console.log("Logout...");
   };
 
 

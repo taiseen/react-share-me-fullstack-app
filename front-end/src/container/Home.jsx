@@ -15,6 +15,7 @@ const Home = () => {
   const [user, setUser] = useState();
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
+  // get user from LocalStorage...
   const userInfo = localStorage.getItem('user') !== 'undefined'
     ? JSON.parse(localStorage.getItem('user'))
     : localStorage.clear();

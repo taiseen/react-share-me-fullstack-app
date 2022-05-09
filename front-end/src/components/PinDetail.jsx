@@ -73,7 +73,7 @@ const PinDetail = ({ user }) => {
 
   useEffect(() => {
     fetchPinDetails();
-  }, [pinId]);
+  }, [pinId, fetchPinDetails]);
 
 
   if (!pinDetail) <Spinner message="Showing pin" />
@@ -103,7 +103,7 @@ const PinDetail = ({ user }) => {
                       href={`${pinDetail.image.asset.url}?dl=`}
                       className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 "
                     >
-                      <MdDownloadForOffline fontSize={28}/>
+                      <MdDownloadForOffline fontSize={28} />
                     </a>
                   </Tippy>
                 </div>
