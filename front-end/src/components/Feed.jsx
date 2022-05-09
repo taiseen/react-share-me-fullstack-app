@@ -21,7 +21,7 @@ const Feed = () => {
       setLoading(true);
       // GROQ || sanity query 
       const query = searchQuery(categoryId);
-      
+
       sanityConnection.fetch(query).then(data => {
         setPins(data);
         setLoading(false);
@@ -45,6 +45,13 @@ const Feed = () => {
     );
   }
 
+
+  if (!pins?.length) {
+    return <h2
+      className='text-center text-xl md:text-2xl text-red-500 mt-20'>
+      No Pin Available...
+    </h2>
+  }
 
   return (
     <div>
